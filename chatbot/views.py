@@ -1,14 +1,16 @@
-from rest_framework import status
+from rest_framework import serializers, status
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 
-# Create your views here.
-class IndexView(APIView):
+from .serializers import ChatSerializer
 
-    def get(self, request, format=None):
+class ChatAPIView(GenericAPIView):
 
-        data = {
-            "body": "REST Motherfucker, do you speak it!"
-        }
+    serializer_class = ChatSerializer
 
-        return Response(data, status=status.HTTP_200_OK) 
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        res = serializer.validated_data
+        return Response(res, status=status.HTTP_200_OK)
