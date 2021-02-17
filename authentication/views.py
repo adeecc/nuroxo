@@ -14,6 +14,9 @@ class ProfileView(ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    def get_queryset(self):
+        return self.queryset.filter(id=self.request.user.id)
+
 
 class RegisterView(GenericAPIView):
 
