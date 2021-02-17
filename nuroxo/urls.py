@@ -4,6 +4,7 @@ from drf_yasg import openapi
 
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -25,4 +26,6 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc',
                                        cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
+    path('api/v1/auth/', include('authentication.urls')),
+    path('api/v1/chatbot/', include('chatbot.urls'))
 ]
