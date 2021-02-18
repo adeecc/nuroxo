@@ -1,5 +1,6 @@
 # Workflow
 venv/
+debug/
 .vscode
 .idea
 
@@ -24,3 +25,6 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+
+# aiml
+*.brn

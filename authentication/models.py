@@ -84,7 +84,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def __str__(self):
-        return f"{self.username} ({self.first_name} {self.last_name})"
+        return f"{self.username} ({self.get_full_name()})"
+
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def tokens(self):
         refresh = RefreshToken.for_user(self)
